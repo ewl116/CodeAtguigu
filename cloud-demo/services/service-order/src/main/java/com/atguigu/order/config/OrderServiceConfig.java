@@ -1,5 +1,7 @@
 package com.atguigu.order.config;
 
+import feign.Logger;
+import feign.Retryer;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,4 +22,15 @@ public class OrderServiceConfig {
         return new RestTemplate();
     }
 
+    // TODO 日志全纪录组件
+    @Bean
+    Logger.Level feignLoggerLevel() {
+        return Logger.Level.FULL;
+    }
+
+    // TODO 重试器
+    /*@Bean
+    Retryer retryer() {
+        return new Retryer.Default();
+    }*/
 }

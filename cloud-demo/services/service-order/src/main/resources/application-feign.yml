@@ -1,0 +1,18 @@
+spring:
+  cloud:
+    openfeign:
+      client:
+        # TODO 超时控制
+        config:
+          default:
+            logger-level: full
+            connect-timeout: 1000
+            read-timeout: 2000
+          service-product:
+            logger-level: full
+            connect-timeout: 3000
+            read-timeout: 5000
+# TODO 开启兜底回调
+feign:
+  sentinel:
+    enabled: true

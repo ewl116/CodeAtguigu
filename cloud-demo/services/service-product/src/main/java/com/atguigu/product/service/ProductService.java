@@ -4,6 +4,7 @@ import com.atguigu.product.bean.Product;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @Description: 商品Service
@@ -26,6 +27,13 @@ public class ProductService {
         product.setPrice(new BigDecimal("99"));
         product.setProductName("苹果" + productId);
         product.setNum(2);
+
+        /*try {
+            TimeUnit.SECONDS.sleep(100);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }*/
+
         return product;
     }
 

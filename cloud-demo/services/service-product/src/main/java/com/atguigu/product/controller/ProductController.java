@@ -2,6 +2,7 @@ package com.atguigu.product.controller;
 
 import com.atguigu.product.bean.Product;
 import com.atguigu.product.service.ProductService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,9 +27,11 @@ public class ProductController {
      * @date 2025/4/7
      */
     @GetMapping("/product/{id}")
-    public Product getProduct(@PathVariable("id") Long productId) {
-        Product product = productService.getProduct(productId);
+    public Product getProduct(@PathVariable("id") Long productId,
+                              HttpServletRequest request) {
+        System.out.println(request.getHeader("X-Token"));
         System.out.println("hello");
+        Product product = productService.getProduct(productId);
         return product;
     }
 }

@@ -3,6 +3,8 @@ server:
 spring:
   profiles:
     active: dev
+    # 包含application-feign.yml配置
+    include: feign
   application:
     name: service-order
   cloud:
@@ -10,8 +12,11 @@ spring:
       server-addr: 127.0.0.1:8848
       config:
         namespace: ${spring.profiles.active:public}
-
   config:
     import:
       - nacos:common.properties?group=order
       - nacos:database.properties?group=order
+logging:
+  level:
+    com.atguigu.order.feign: debug
+
