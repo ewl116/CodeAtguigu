@@ -1,6 +1,7 @@
 package com.atguigu.order.service;
 
 import com.atguigu.order.bean.Order;
+import com.atguigu.order.feign.ProductFeignClient;
 import com.atguigu.product.bean.Product;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,8 @@ public class OrderService {
     LoadBalancerClient loadBalancerClient;
     @Autowired
     RestTemplate restTemplate;
+    @Autowired
+    ProductFeignClient productFeignClient;
 
     /**
      * @description 创建订单
@@ -40,7 +43,8 @@ public class OrderService {
     public Order createOrder(Long productId, Long userId) {
         Order order = new Order();
         // 获取商品信息
-        Product product = getProductFromRemoteWithLoadBalancerAnnotation(productId);
+//        Product product = getProductFromRemoteWithLoadBalancerAnnotation(productId);
+        Product product = productFeignClient.getProductById(productId);
         order.setId(1);
         // 总金额
         order.setTotalAmount(product.getPrice().multiply(new BigDecimal(product.getNum())));

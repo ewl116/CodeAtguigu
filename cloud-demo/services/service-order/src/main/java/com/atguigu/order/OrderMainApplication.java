@@ -13,6 +13,8 @@ import org.springframework.context.annotation.Bean;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
+// TODO 开启Feign远程调用功能
+@EnableFeignClients
 @EnableDiscoveryClient
 @SpringBootApplication
 public class OrderMainApplication {
@@ -29,9 +31,9 @@ public class OrderMainApplication {
     ApplicationRunner applicationRunner(NacosConfigManager nacosConfigManager) {
         return args -> {
             ConfigService configService = nacosConfigManager.getConfigService();;
-            configService.addListener("service-order.properties"
-                    , "DEFAULT_GROUP"
-                    , new Listener() {
+            configService.addListener("service-order.properties",
+                    "DEFAULT_GROUP",
+                    new Listener() {
                         @Override
                         public Executor getExecutor() {
                             return Executors.newFixedThreadPool(4);
