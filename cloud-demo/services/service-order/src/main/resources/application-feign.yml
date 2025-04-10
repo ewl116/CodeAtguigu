@@ -12,6 +12,14 @@ spring:
             logger-level: full
             connect-timeout: 3000
             read-timeout: 5000
+    # TODO 流量保护
+    sentinel:
+      transport:
+        dashboard: localhost:8080
+      # 提前加载
+      eager: true
+      # 是否统一web上下文，是否要分割请求链路，默认true表示不分割
+      web-context-unify: false
 # TODO 开启兜底回调
 feign:
   sentinel:

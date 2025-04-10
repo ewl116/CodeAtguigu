@@ -1,5 +1,7 @@
 package com.atguigu.order.service;
 
+import com.alibaba.csp.sentinel.annotation.SentinelResource;
+import com.alibaba.csp.sentinel.slots.block.BlockException;
 import com.atguigu.order.bean.Order;
 import com.atguigu.order.feign.ProductFeignClient;
 import com.atguigu.product.bean.Product;
@@ -40,6 +42,7 @@ public class OrderService {
      * @author yiwenli
      * @date 2025/4/7
      */
+    @SentinelResource(value = "createOrder", blockHandler = "createOrderBlockHandler")
     public Order createOrder(Long productId, Long userId) {
         Order order = new Order();
         // 获取商品信息
@@ -53,6 +56,24 @@ public class OrderService {
         order.setAddress("尚硅谷");
         // 远程查询商品列表
         order.setProductList(List.of(product));
+        return order;
+    }
+
+    /**
+     * @description 执行兜底回调
+     * @param
+     * @return
+     * @author yiwenli
+     * @date 2025/4/9
+     */
+    public Order createOrderBlockHandler(Long productId, Long userId, BlockException e) {
+        Order order = new Order();
+        order.setId(1);
+        order.setTotalAmount(new BigDecimal("0"));
+        order.setUserId(userId);
+        order.setNickName("未知用户");
+        order.setAddress("异常信息：" + e.getClass());
+        order.setProductList(List.of());
         return order;
     }
     
