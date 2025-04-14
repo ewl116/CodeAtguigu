@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @Date: 2025/4/7
  */
 @RestController
-@RequestMapping("/api/product")
+//@RequestMapping("/api/product")
 public class ProductController {
 
     @Autowired

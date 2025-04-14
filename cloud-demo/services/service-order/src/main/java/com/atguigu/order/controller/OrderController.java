@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 //@RefreshScope
 @RestController
 // TODO 此处的请求路径和配置文件中路由路径一致
-@RequestMapping("/api/order")
+//@RequestMapping("/api/order")
 public class OrderController {
 
     @Autowired
