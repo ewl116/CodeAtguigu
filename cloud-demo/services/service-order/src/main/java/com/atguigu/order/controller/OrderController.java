@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.RestController;
 // TODO @RefreshScope配合@Value使用实现配置的自动更新
 //@RefreshScope
 @RestController
+// TODO 此处的请求路径和配置文件中路由路径一致
+@RequestMapping("/api/order")
 public class OrderController {
 
     @Autowired

@@ -1,0 +1,42 @@
+# 存放各种路由规则
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: bing-route
+          uri: https://cn.bing.com
+          # 断言的短写法
+#          predicates:
+#            - Path=/**
+          # 断言的长写法
+          predicates:
+            - name: Path
+              args:
+                patterns: /search
+                matchTrailingSlash: true
+            - name: Query
+              # 必须带q参数且参数值是haha
+              args:
+                param: q
+                regexp: haha
+            # 自定义断言工厂短写法
+#            - Vip=user,yiwenli
+            # 自定义断言工厂长写法
+            - name: Vip
+              args:
+                param: user
+                value: yiwenli
+          order: 99
+        - id: order-route
+          # 目的地
+          uri: lb://service-order
+          # 断言
+          predicates:
+            - Path=/api/order/**
+          order: 1
+        - id: product-route
+          uri: lb://service-product
+          predicates:
+            - Path=/api/product/**
+          order: 2

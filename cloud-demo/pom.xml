@@ -16,6 +16,7 @@
     <modules>
         <module>services</module>
         <module>model</module>
+        <module>gateway</module>
     </modules>
 
     <!-- TODO 这是父项目，修改打包方式 -->
